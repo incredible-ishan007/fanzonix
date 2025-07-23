@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous">
+        </script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"></script>
+
+    <script>
+        var mymodule = angular.module("kuchModule", []);
+        mymodule.controller("kuchController", function ($scope, $http) {
+
+            $scope.txtEmail6;
+            $scope.txtPwdOld;
+            $scope.txtPwdNew;
+
+
+            $scope.doUpdatePass = function () {
+                var url = "/do-update-pass?email=" + $scope.txtEmail6 + "&oldpass=" + $scope.txtPwdOld + "&newpass=" + $scope.txtPwdNew;
+
+
+                $http.get(url).then(allGoodFx, someBadFx);
+                function allGoodFx(response) {
+
+                    alert(JSON.stringify(response.data));
+
+                }
+
+                function someBadFx(response) {
+                    alert(JSON.stringify(response.data));
+                }
+            };
+
+        })
+
+    </script>
+
+     <script>
+        function showUser() {
+
+            let activeUser = localStorage.getItem("activeUser");
+            document.getElementById("floatingInput").value = activeUser
+            
+
+        }
+
+
+
+    </script>
+
+    <script>
+        function logout(){
+            localStorage.removeItem("activeUser");
+            location.href=("/")
+        }
+
+            function player_detail(){
+            location.href="/player-detail"
+        }
+        function all_tournaments(){
+            location.href="/all-tournaments"
+        }
+
+
+        
+    </script>
+</head>
+
+<body ng-app="kuchModule" ng-controller="kuchController" >
+    
+    <form>
+<!-- 
+        <div class="card" style="width: 19rem; float: left;margin-left: 300px;">
+            <img src="pics/images.jpeg" class="card-img-top" alt="...">
+            <div class="card-body">
+
+                <a href="/player-detail">Profile</a>
+            </div>
+        </div>
+
+        <div class="card" style="width: 19rem; float: left; ">
+            <img src="pics/images.jpeg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <a href="/all-tournaments">Explore Tournament</a>
+
+            </div>
+        </div> -->
+
+
+         <div class="card" style="width: 19rem; float: left; margin-left: 150px; ">
+            <img src="pics/images.jpeg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <!-- <a href="/all-tournaments">Explore Tournament</a> -->
+                <button type="button" class="btn btn-danger" onclick="player_detail()">Player Profile</button>
+
+            </div>
+        </div>
+         <div class="card" style="width: 19rem; float: left; ">
+            <img src="pics/images.jpeg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <!-- <a href="/all-tournaments">Explore Tournament</a> -->
+                <button type="button" class="btn btn-danger" onclick="all_tournaments()">All Tournaments</button>
+
+            </div>
+        </div>
+    </form>
+    <div class="card" style="width: 19rem; float: left;">
+        <img src="pics/settings-hd.jpeg" class="card-img-top" alt="...">
+        <div class="card-body">
+
+            <input type="button" class="btn btn-danger" value="Update Password" data-bs-toggle="modal" onclick="showUser()"
+                data-bs-target="#settings-modal">
+            </input>
+        </div>
+    </div>
+    <div class="modal" tabindex="-1" id="settings-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Settings</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-floating mb-3">
+                        <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com"
+                            ng-model="txtEmail6" readonly>
+                        <label for="floatingInput" >Email address</label >
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="password" class="form-control" id="floatingPasswordOld" placeholder="Old Password"
+                            ng-model="txtPwdOld">
+                        <label for="floatingPasswordOld">Old Password</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="password" class="form-control" id="floatingPasswordNew" placeholder="New Password"
+                            ng-model="txtPwdNew">
+                        <label for="floatingPasswordNew">New Password</label>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" ng-click="doUpdatePass();">Update
+                        Password</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <form>
+        
+        <div class="card" style="width: 19rem; float: left; ">
+            <img src="pics/images.jpeg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <!-- <a href="/all-tournaments">Explore Tournament</a> -->
+                <button type="button" class="btn btn-danger" onclick="logout()">Logout</button>
+
+            </div>
+        </div>
+    </form>
+
+</body>
+
+</html>
