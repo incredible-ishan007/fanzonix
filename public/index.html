@@ -34,7 +34,29 @@
 
             })
 
+            function checkFormStatus2() {
+                let emailOk = $("#errPicE2").hasClass("ok-pic");
+                let pwdOk = $("#errPicP2").hasClass("ok-pic");
+               
+                $("#ajax_login").prop("disabled", !(emailOk && pwdOk ));
+            }
 
+            function checkFormStatus() {
+                let email = $("#txtEmail").val().trim();
+                let pwd = $("#txtPwd").val().trim();
+                let comboVal = $("#comboUser").val();
+                let comboFilled = comboVal && comboVal.trim() !== "";
+
+                if (email !== "" && pwd !== "" && comboFilled) {
+                    $("#ajax_signup").prop("disabled", false);
+                } else {
+                    $("#ajax_signup").prop("disabled", true);
+                }
+            }
+
+            $("#comboUser").change(function () {
+                checkFormStatus();
+            });
 
 
             $("#indexEye2").click(function () {
@@ -72,9 +94,13 @@
                     $("#errMsgE").html("valid email id").addClass("ok").removeClass("not-ok");
                     $("#errPicE").addClass("ok-pic").removeClass("not-ok-pic");
                 }
+                checkFormStatus();
 
 
-            })
+
+            });
+
+
 
             $("#txtEmail2").keyup(function () {
 
@@ -100,8 +126,10 @@
                     $("#errPicE2").addClass("ok-pic").removeClass("not-ok-pic");
                 }
 
+                checkFormStatus2();
 
             })
+
 
             $("#txtPwd").keyup(function () {
 
@@ -142,12 +170,12 @@
                     $("#errMsgP").html("valid Password").addClass("ok").removeClass("not-ok");
                     $("#errPicP").addClass("ok-pic").removeClass("not-ok-pic");
                 }
+                checkFormStatus();
+
+            });
 
 
 
-
-
-            })
 
 
 
@@ -174,6 +202,7 @@
                     $("#errPicP2").addClass("ok-pic").removeClass("not-ok-pic");
                 }
 
+                 checkFormStatus2();
             })
 
 
@@ -557,40 +586,43 @@
 </head>
 
 <body style="width: 100%;">
-<form method="get">
-<div style="background-color: rgb(40,40,40); " id="top">
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top py-2" style="background-color: #000000;">
-    <div class="container-fluid">
-    <!-- Brand -->
-    <a class="navbar-brand d-flex align-items-center" href="#" style="font-size: 30px;">
-      <div id="logo" class="me-2" style="width: 40px; height: 40px; border: 1px white solid;"></div>
-      <span id="name_brand">FANZONIX</span>
-    </a>
+    <form method="get">
+        <div style="background-color: rgb(40,40,40); " id="top">
+            <nav class="navbar navbar-expand-lg navbar-dark fixed-top py-2" style="background-color: #000000;">
+                <div class="container-fluid">
+                    <!-- Brand -->
+                    <a class="navbar-brand d-flex align-items-center" href="#" style="font-size: 30px;">
+                        <div id="logo" class="me-2" style="width: 40px; height: 40px; border: 1px white solid;"></div>
+                        <span id="name_brand">FANZONIX</span>
+                    </a>
 
-    <!-- Toggler -->
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-      aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+                    <!-- Toggler -->
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
 
-    <!-- Nav Links -->
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav mx-auto text-center" style="font-size: larger;">
-        <a class="nav-link text-white" href="#service">Services</a>
-        <a class="nav-link text-white" href="#mission">Missions</a>
-        <a class="nav-link text-white" href="#about">About</a>
-        <a class="nav-link text-white" href="#team">Team</a>
-        <a class="nav-link text-white" href="#reachus">Reach us</a>
-      </div>
+                    <!-- Nav Links -->
+                    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                        <div class="navbar-nav mx-auto text-center" style="font-size: larger;">
+                            <a class="nav-link text-white" href="#service">Services</a>
+                            <a class="nav-link text-white" href="#mission">Missions</a>
+                            <a class="nav-link text-white" href="#about">About</a>
+                            <a class="nav-link text-white" href="#team">Team</a>
+                            <a class="nav-link text-white" href="#reachus">Reach us</a>
+                        </div>
 
-      <!-- Action Buttons -->
-      <div class="d-flex flex-column flex-lg-row gap-2 mt-3 mt-lg-0">
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#signup-modal">Sign Up</button>
-        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#login-modal">Login</button>
-      </div>
-        </div>
-        </div>
-    </nav>
+                        <!-- Action Buttons -->
+                        <div class="d-flex flex-column flex-lg-row gap-2 mt-3 mt-lg-0">
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#signup-modal">Sign Up</button>
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                data-bs-target="#login-modal">Login</button>
+                        </div>
+                    </div>
+                </div>
+            </nav>
 
 
 
@@ -939,7 +971,7 @@
                     <hr style="background-color: white; color: white;" id="reachus">
 
 
-                    <section class="contact-section" >
+                    <section class="contact-section">
                         <div class="contact-card" style="color: white;background-color: rgb(0, 0, 0);" id="aboutme">
                             <h1>📍Reach Us</h1><br>
                             <ul>
@@ -950,7 +982,8 @@
                                     12, Near PGI</li>
                             </ul>
                             <div class="social-icons">
-                                <a href="https://www.facebook.com/profile.php?id=61582690074371" style="margin-left: 30px;"><i class="fab fa-facebook-f"></i></a>
+                                <a href="https://www.facebook.com/profile.php?id=61582690074371"
+                                    style="margin-left: 30px;"><i class="fab fa-facebook-f"></i></a>
                                 <a href="https://x.com/IshanGarg00007"><i class="fab fa-twitter"></i></a>
                                 <a href="https://www.instagram.com/ishan_garg007"><i class="fab fa-instagram"></i></a>
 
@@ -973,23 +1006,23 @@
 
                 </div>
             </div>
-         <footer style="background-color: black; color: white; padding: 10px;">
-  <div class="container">
-    <div class="row">
-      <!-- Left -->
-      <div class="col-md-6 text-start mb-2 mb-md-0">
-        &copy; 2025 FANZONIX
-      </div>
+            <footer style="background-color: black; color: white; padding: 10px;">
+                <div class="container">
+                    <div class="row">
+                        <!-- Left -->
+                        <div class="col-md-6 text-start mb-2 mb-md-0">
+                            &copy; 2025 FANZONIX
+                        </div>
 
-      <!-- Right -->
-      <div class="col-md-6 text-end">
-        <a href="#aboutme" style="color: #ccc; margin-right: 3px; text-decoration: none;">About</a>
-        <a href="/terms" style="color: #ccc; margin-right: 3px; text-decoration: none;">Terms</a>
-        <a href="/contact" style="color: #ccc; text-decoration: none;">Contact</a>
-      </div>
-    </div>
-  </div>
-</footer>
+                        <!-- Right -->
+                        <div class="col-md-6 text-end">
+                            <a href="#aboutme" style="color: #ccc; margin-right: 3px; text-decoration: none;">About</a>
+                            <a href="/terms" style="color: #ccc; margin-right: 3px; text-decoration: none;">Terms</a>
+                            <a href="/contact" style="color: #ccc; text-decoration: none;">Contact</a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
 
 
 
@@ -1051,20 +1084,16 @@
                                 <div id="errMsgP" style="margin-top: 8px; margin-left: 15px;"></div>
                             </div>
                             <select required class="form-select" aria-label="Default select example" id="comboUser"
-                                name="comboUser " style="font-weight: normal;color: rgb(0, 0, 0);">
-                                <option value="" disabled selected>User Type</option>
+                                name="comboUser" style="font-weight: normal;color: rgb(0, 0, 0);">
+                                <option value="" disabled selected hidden>User Type</option>
                                 <option value="player">player</option>
                                 <option value="organizer">organizer</option>
                             </select>
 
-
-
-
-
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
-                                id="ajax_signup">Sign
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="ajax_signup"
+                                disabled>Sign
                                 Up</button>
 
                         </div>
