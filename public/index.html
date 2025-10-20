@@ -215,18 +215,18 @@
             $("#ajax_signup").click(function () {
 
 
-                if (document.getElementById("txtEmail").value == "") {
+                if (document.getElementById("txtEmail").value=="") {
                     alert("plzz fill Email");
                     document.getElementById("signup_user").click();
                 }
 
-                else if (document.getElementById("txtPwd").value == "") {
+                else if (document.getElementById("txtPwd").value=="") {
                     alert("plzz fill Passowd");
                     document.getElementById("signup_user").click();
                 }
 
 
-                else if (document.getElementById("comboUser").value == "") {
+                else if (document.getElementById("comboUser").value=="") {
                     alert("plzz fill user type");
                     document.getElementById("signup_user").click();
                 }
@@ -249,7 +249,7 @@
                     $.ajax(obj).then(
                         function (response) {
                             alert(response)
-                        }).fail(function (err) { alert(err.message) })
+                        }).fail(function (err) { alert("Sorry,Email already taken") })
                 }
             })
 
