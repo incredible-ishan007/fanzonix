@@ -248,8 +248,13 @@
 
                     $.ajax(obj).then(
                         function (response) {
-                            alert(response)
-                        }).fail(function (err) { alert("Sorry,Email already taken") })
+                            if(response=="Record Saved Successfulllyyy....Badhai"){
+                                alert("Record Saved Successfulllyyy....Badhai");
+                            }
+                            else{
+                                alert("Email already taken..");
+                            }
+                        }).fail(function (err) { alert(err.message) })
                 }
             })
 
