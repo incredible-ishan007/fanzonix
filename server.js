@@ -564,14 +564,21 @@ async function RajeshBansalKaChirag(imgurl) {
 //-------------------------------------------------------------
 
 app.get("/do-update-pass", function (req, resp) {
+    mySqlVen.query(
+        "update sports_signup set pass=? where email=? and pass=?",
+        [req.query.newpass, req.query.email, req.query.oldpass],
+        function (err, result) {
+            if (err) {
+                resp.send("Server error");
+            } 
+            else if (result.affectedRows === 0) {
+                resp.send("Invalid email or old password");
+            } 
+            else {
+                resp.send("Password updated successfully");
+            }
+        }
+    );
+});
 
-    mySqlVen.query("update sports_signup set pass=? where email=? and pass=? ", [req.query.newpass,req.query.email,req.query.oldpass],function (err) {
-        if(err==null){
-            resp.send("congratulation password updated")
-        }
-        else{
-            resp.send("Invalid email or password")
-        }
-    })
-})
 
